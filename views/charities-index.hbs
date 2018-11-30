@@ -1,0 +1,9 @@
+<h1>List of Charities</h1>
+
+<div class="row">
+    {{#each charities}}
+        <div class="col-sm-3">
+            <h2><a href="/charities/{{this._id}}">{{this.org}}</a></h2>
+        </div>
+    {{/each}}
+</div>

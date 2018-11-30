@@ -1,0 +1,23 @@
+<a href="/">Home</a>
+
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+        <h1>{{charity.org}}</h1>
+        <p><a href="/charities/{{charity._id}}/edit"> Edit </a></p>
+        <p>
+            <form method="POST" action="/charities/{{charity._id}}?_method=DELETE">
+                <button type="submit"> Delete </button>
+            </form>
+        </p>
+
+
+        <!-- Donation form -->
+        {{> donation-form}}
+
+        <!-- Show Donation -->
+        {{#each donations}}
+            {{> donation}}
+        {{/each}}
+        
+    </div>
+</div>
