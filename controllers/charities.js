@@ -1,8 +1,9 @@
-const charity = require('../models/charity')
-const donation = require('../models/donation')
+const Charity = require('../models/charity');
+const Donation = require('../models/donation');
 
+module.exports = (app) => {
 app.get('/', (req, res) => {
-    charity.find()
+    Charity.find()
     .then(charities => {
         res.render('charities-index', {charities: charities});
     })
@@ -18,9 +19,10 @@ app.get('/charities/new', (req, res) => {
 
 // CREATE
 app.post('/charities', (req, res) => {
-    charity.create(req.body)
+    console.log("req.body:", req.body)
+    Charity.create(req.body)
         .then((charity) => {
-            console.log(charity)
+            console.log("new charity:", charity)
             res.redirect(`/charities/${charity.id}`)
         })
         .catch((err) => {
@@ -30,9 +32,9 @@ app.post('/charities', (req, res) => {
 
 // SHOW
 app.get('/charities/:id', (req, res) => {
-    charity.findById(req.params.id)
+    Charity.findById(req.params.id)
         .then((charity) => {
-            donation.find({ charityId: req.params.id})
+            Donation.find({ charityId: req.params.id})
                 .then(donations => {
                     res.render('charities-show', {charity: charity, donations: donations})
                 })
@@ -44,14 +46,14 @@ app.get('/charities/:id', (req, res) => {
 
 // EDIT
 app.get('/charities/:id/edit', (req, res) => {
-    charity.findById(req.params.id, function(err, charity) {
+    Charity.findById(req.params.id, function(err, charity) {
         res.render('charities-edit', {charity: charity})
     })
 })
 
 // UPDATE
 app.put('/charities/:id', (req, res) => {
-    charity.findByIdAndUpdate(req.params.id, req.body)
+    Charity.findByIdAndUpdate(req.params.id, req.body)
         .then(charity => {
             res.redirect(`/charities/${charity._id}`)
         })
@@ -63,11 +65,11 @@ app.put('/charities/:id', (req, res) => {
 // DELETE
 app.delete('/charities/:id', function(req, res) {
     console.log('Charity deleted')
-    charity.findByIdAndRemove(req.params.id).then((charity) => {
+    Charity.findByIdAndRemove(req.params.id).then((charity) => {
         res.redirect('/')
     }).catch((err => {
         console.log(err.message)
     }))
 })
+}
 
-module.exports = app

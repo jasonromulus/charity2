@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const charity = mongoose.model('Charity', {
-  organization: String
+  name: String
 })
 
 module.exports = charity

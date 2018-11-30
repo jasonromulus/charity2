@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-block">
-        <h4 class="card-title"> {{this.date}}</h4>
-        <p class="card-text"> {{this.amount}}</p>
+        <h4 class="card-title"> {{moment this.date "dddd, MMMM DD YYYY"}}</h4>
+        <p class="card-text"> ${{this.amount}}</p>
         <p class="card-text"> {{this.notes}}</p>
         <p>
             <form method="POST" action="/charities/donations/{{this._id}}?_method=DELETE">
