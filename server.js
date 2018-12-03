@@ -7,8 +7,6 @@ const methodOverride = require('method-override')
 const mongoose = require('mongoose');
 const moment = require('helper-moment');
 
-
-
 //Handlebars stuff
 app.engine('hbs', exphbs({defaultLayout: 'main', extname: '.hbs', helpers: {moment: moment}}));
 app.set('view engine', 'hbs');
